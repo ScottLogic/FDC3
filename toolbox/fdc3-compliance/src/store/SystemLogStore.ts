@@ -54,7 +54,14 @@ class SystemLogStore {
 			type: type,
 		});
 
-		this.logList.push({ id: nanoid(), name, type, message, body, variant: variant ?? "text" });
+		this.logList.push({
+			id: nanoid(),
+			name,
+			type,
+			message,
+			body,
+			variant: variant ?? "text",
+		});
 	}
 }
 

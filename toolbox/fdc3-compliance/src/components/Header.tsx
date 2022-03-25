@@ -11,64 +11,74 @@ export const Header = (props: { fdc3Available: boolean }) => {
 			try {
 				let implInfo = fdc3.getInfo();
 				let displayInfo = {
-					fdc3Version: "not specified", 
-					provider: "not specified", 
-					providerVersion: "not specified"
+					fdc3Version: "not specified",
+					provider: "not specified",
+					providerVersion: "not specified",
 				};
-				if (implInfo.fdc3Version) {displayInfo.fdc3Version = implInfo.fdc3Version; } 
-				if (implInfo.provider) {displayInfo.provider = implInfo.provider; } 
-				if (implInfo.providerVersion) {displayInfo.providerVersion = implInfo.providerVersion; } 
+				if (implInfo.fdc3Version) {
+					displayInfo.fdc3Version = implInfo.fdc3Version;
+				}
+				if (implInfo.provider) {
+					displayInfo.provider = implInfo.provider;
+				}
+				if (implInfo.providerVersion) {
+					displayInfo.providerVersion = implInfo.providerVersion;
+				}
 				setAppInfo(displayInfo);
 			} catch (e) {
-				console.error("Failed to retrieve FDC3 implementation info",e);
+				console.error("Failed to retrieve FDC3 implementation info", e);
 			}
 		}
 	}, [props.fdc3Available]);
 
 	return (
-		<Box sx={{
-			flexGrow: 1,
-		}}>
+		<Box
+			sx={{
+				flexGrow: 1,
+			}}
+		>
 			<Box
 				sx={{
-					backgroundImage: 'linear-gradient(to bottom, #0086bf, #00bbe1)',
-					height: '200px',
-					width: '100%',
-					left: '0px',
-					top: '0px',
-					position: 'absolute',
+					backgroundImage: "linear-gradient(to bottom, #0086bf, #00bbe1)",
+					height: "200px",
+					width: "100%",
+					left: "0px",
+					top: "0px",
+					position: "absolute",
 					zIndex: -10,
 				}}
 			/>
 			<AppBar
 				elevation={0}
 				sx={{
-					position: 'static',
-					bgcolor: 'transparent'
+					position: "static",
+					bgcolor: "transparent",
 				}}
 			>
-				<Toolbar sx={{
-					bg: 'transparent',
-					pt: 2,
-					px: 4,
-					display: 'flex',
-					justifyContent: 'space-between',
-				}}>
+				<Toolbar
+					sx={{
+						bg: "transparent",
+						pt: 2,
+						px: 4,
+						display: "flex",
+						justifyContent: "space-between",
+					}}
+				>
 					<div>
 						<Typography
 							variant="h3"
 							sx={{
-								color: 'inherit',
+								color: "inherit",
 							}}
 						>
-							<img src="./fdc3-logo.svg" width={150} height={50}/>
+							<img src="./fdc3-logo.svg" width={150} height={50} />
 						</Typography>
 					</div>
 
 					<Box
 						sx={{
-							minWidth: '200px',
-							fontSize: '12px',
+							minWidth: "200px",
+							fontSize: "12px",
 						}}
 					>
 						<table id="providerInfo">

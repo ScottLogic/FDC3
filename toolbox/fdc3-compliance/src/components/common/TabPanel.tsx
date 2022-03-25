@@ -18,7 +18,7 @@ export const TabPanel: React.FC<TabPanelProps> = (props: TabPanelProps) => {
 			aria-labelledby={`scrollable-auto-tab-${index}`}
 			{...other}
 		>
-			{value === index &&
+			{value === index && (
 				<Box
 					sx={{
 						p: 2,
@@ -26,7 +26,7 @@ export const TabPanel: React.FC<TabPanelProps> = (props: TabPanelProps) => {
 				>
 					{children}
 				</Box>
-			}
+			)}
 		</div>
 	);
 };

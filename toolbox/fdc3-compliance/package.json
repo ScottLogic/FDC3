@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build:app": "react-scripts build",
-    "build:lib": "cd testRunner && yarn build",
+    "build:lib": "cd testRunner && yarn install && yarn build",
     "build": "yarn build:lib && yarn install && yarn build:app",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

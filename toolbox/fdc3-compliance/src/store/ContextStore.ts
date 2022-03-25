@@ -133,7 +133,11 @@ class ContextStore {
 					value: contextType,
 					variant: "text",
 				});
-				this.contextListeners.push({ id: listenerId, type: contextType, listener: contactListener });
+				this.contextListeners.push({
+					id: listenerId,
+					type: contextType,
+					listener: contactListener,
+				});
 			});
 		} catch (e) {
 			systemLogStore.addLog({

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Box, Paper, Snackbar, Tabs, Tab, Typography, Link, SnackbarCloseReason } from "@mui/material";
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { observer } from "mobx-react";
 import "normalize.css";
 import "@fontsource/roboto";
@@ -16,61 +16,61 @@ import { FDC3Message } from "./components/FDC3Message";
 const mainTheme = createTheme({
 	palette: {
 		primary: {
-			light: '#005d85',
-			main: '#0086bf',
-			dark: '#339ecb',
-			contrastText: '#fff',
+			light: "#005d85",
+			main: "#0086bf",
+			dark: "#339ecb",
+			contrastText: "#fff",
 		},
 	},
 	typography: {
 		h4: {
-			fontFamily: 'Source Code Pro',
-			fontSize: '20px',
-			color: '#0086bf',
-			paddingLeft: '4px',
-			paddingBottom: '11px',
+			fontFamily: "Source Code Pro",
+			fontSize: "20px",
+			color: "#0086bf",
+			paddingLeft: "4px",
+			paddingBottom: "11px",
 		},
 		h5: {
-			fontSize: '16px',
+			fontSize: "16px",
 		},
 		body1: {
-			fontSize: '1rem',
-			fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+			fontSize: "1rem",
+			fontFamily: "Roboto, Helvetica, Arial, sans-serif",
 			fontWeight: 400,
 			lineHeight: 1.5,
-			letterSpacing: '0.00938em',
-			marginBlockStart: '10px',
-			marginBlockEnd: '10px',
-		}
+			letterSpacing: "0.00938em",
+			marginBlockStart: "10px",
+			marginBlockEnd: "10px",
+		},
 	},
 	components: {
 		MuiLink: {
 			defaultProps: {
-				underline: 'hover',
-			}
-		}
-	}
+				underline: "hover",
+			},
+		},
+	},
 });
 
 const StyledTabs = styled(Tabs)({
-	borderBottomColor: '#acb2c0',
-	borderBottomStyle: 'solid',
-	borderBottomWidth: '1px',
-	minHeight: '28px',
+	borderBottomColor: "#acb2c0",
+	borderBottomStyle: "solid",
+	borderBottomWidth: "1px",
+	minHeight: "28px",
 	'& [aria-selected="true"]': {
-		backgroundColor: 'rgba(0, 134, 191, 0.21)',
+		backgroundColor: "rgba(0, 134, 191, 0.21)",
 	},
-	'& .MuiTabs-indicatorSpan': {
-    backgroundColor: 'rgba(0, 134, 191, 0.21)',
-  },
-  '& .MuiTabs-indicator': {
-    backgroundColor: '#00bbe1',
-  },
+	"& .MuiTabs-indicatorSpan": {
+		backgroundColor: "rgba(0, 134, 191, 0.21)",
+	},
+	"& .MuiTabs-indicator": {
+		backgroundColor: "#00bbe1",
+	},
 });
 
 const StyledLink = styled(Link)({
-	color: '#5b606f',
-	fontWeight: 'bold',
+	color: "#5b606f",
+	fontWeight: "bold",
 });
 
 const openAPIDocs = (event: React.MouseEvent<HTMLElement>) => {
@@ -98,7 +98,7 @@ export const App = observer(() => {
 		setTimeout(() => snackbarStore.clearSnackbarData(), 500);
 	};
 
-	const handleAlertClose = (event: Event | React.SyntheticEvent<any>) => {
+	const handleAlertClose = () => {
 		setOpenSnackbar(false);
 		// Need to show close animation
 		setTimeout(() => snackbarStore.clearSnackbarData(), 500);
@@ -120,12 +120,14 @@ export const App = observer(() => {
 
 	return (
 		<ThemeProvider theme={mainTheme}>
-			<Box sx={{
-				flexGrow: 1,
-				display: 'flex',
-				flexDirection: 'column',
-				gap: 2,
-			}}>
+			<Box
+				sx={{
+					flexGrow: 1,
+					display: "flex",
+					flexDirection: "column",
+					gap: 2,
+				}}
+			>
 				<Header fdc3Available={fdc3Available} />
 				{fdc3Available ? (
 					<Box
@@ -137,14 +139,12 @@ export const App = observer(() => {
 							sx={{
 								px: 2,
 								py: 2,
-								display: 'flex',
-								flexDirection: 'column',
+								display: "flex",
+								flexDirection: "column",
 								gap: 1,
 							}}
 						>
-							<Typography
-								variant="h4"
-							>{`{compliance}`}</Typography>
+							<Typography variant="h4">{`{compliance}`}</Typography>
 							<StyledTabs
 								value={tabIndex}
 								indicatorColor="primary"
@@ -160,7 +160,7 @@ export const App = observer(() => {
 						</Paper>
 					</Box>
 				) : (
-					<FDC3Message/>
+					<FDC3Message />
 				)}
 				<Box
 					sx={{
@@ -172,10 +172,7 @@ export const App = observer(() => {
 						<StyledLink href="https://fdc3.finos.org/docs/api/overview" onClick={openAPIDocs}>
 							FDC3 Standard and APIs
 						</StyledLink>{" "}
-						| Proud member of the{" "}
-						<StyledLink href="https://www.finos.org/">
-							Fintech Open Source Foundation
-						</StyledLink>{" "}
+						| Proud member of the <StyledLink href="https://www.finos.org/">Fintech Open Source Foundation</StyledLink>{" "}
 						| Copyright © 2021 Cosaic, inc. &amp; Contributors to the FDC3 standards project
 					</Typography>
 				</Box>
