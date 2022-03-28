@@ -33,11 +33,15 @@ A basic FDC3 application definition, as defined in the [application directory sp
 
 ## Integration with automated testing
 
-The test suite can be run independently without interaction - for example as part of a CI build, or from the command line. See TypeScript and JavaScript examples [here](./testRunner/examples/). 
-First import the silentRun module from the build folder, and then call the default method. The fdc3 global variable is passed in as a parameter, to remove the need for a complete desktop agent environment:
+The test suite can be run independently without interaction - for example as part of a CI build, or from the command line. See TypeScript and JavaScript examples [here](./testRunner/examples/). The test runner can be used as a module to run the compliance test suite.
+Perform the following steps to include the module in your code:
+- Import the fdc3-compliance module: ```yarn add [path to testRunner folder]```
+- Import/require the ```fdc3-compliance``` module in your code
+- Call the ```runSilentTests``` function, passing in the fdc3 implementation to be tested
 
+Example:
 ```javascript
-const runSilentTests = require("fdc-compliance");
+const { runSilentTests } = require("fdc3-compliance");
 
 // Pass in the fdc3 global object to be tested
 // Results are returned via callback
@@ -46,4 +50,9 @@ runSilentTests(fdc3, (results) => {
   // For more details, see the passed and failed arrays
   console.log(results.stats);
 });
+```
+
+The included example code can be run with the following command line:
+```bash
+node testRunner/examples/ci-test.js
 ```
