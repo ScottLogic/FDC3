@@ -78,6 +78,7 @@ export const TestResult = memo(({ test }: IProps) => {
 							fontFamily: "monospace",
 							fontWeight: "bold",
 							fontSize: 12,
+							wordBreak: 'break-word',
 						}}
 					>
 						{err.message}
