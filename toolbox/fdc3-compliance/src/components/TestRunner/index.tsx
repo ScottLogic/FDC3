@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import { TestSummary } from "../TestSummary";
 import { PlayArrowRounded } from "@mui/icons-material";
@@ -38,21 +38,18 @@ export const TestRunner = observer(() => {
 		}
 	}, []);
 
-	const reportStart = (stuff: any): void => {
-		console.log(stuff)
+	const reportStart = (runner: any): void => {
 		reset();
 		setStatus('running');
-		setTotal(stuff.total)
+		setTotal(runner.total)
 	};
 
 	const reportFailure = (test: any): void => {
-		console.log("Oh no it failed.");
 		setTests((prev) => [ ...prev, test ]);
 		setFailedTests((prev) => prev + 1);
 	};
 
 	const reportSuccess = (test: any) => {
-		console.log("This test passed!!!");
 		setTests((prev) => [ ...prev, test ]);
 		setSuccessfulTests((prev) => prev + 1);
 	};
@@ -72,13 +69,25 @@ export const TestRunner = observer(() => {
 	};
 
 	return (
-    <Stack gap={2}>
+    <Box
+			sx={{
+				display: 'grid',
+				gridTemplateRows: 'auto 1fr',
+				gap: 2,
+				position: 'relative',
+			}}
+		>
       <Box
         sx={{
           display: 'flex',
           gap: 2,
           justifyContent: 'space-between',
           alignItems: 'center',
+					position: 'sticky',
+					top: 0,
+					pt: 1,
+					backgroundColor: 'white',
+					boxShadow: '0 0 0.5rem 1rem white',
         }}
       >
         <LoadingButton
@@ -96,6 +105,6 @@ export const TestRunner = observer(() => {
       </Box>
       
       <TestResults tests={tests}/>
-    </Stack>
+    </Box>
 	);
 });
