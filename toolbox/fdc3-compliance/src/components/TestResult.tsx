@@ -18,8 +18,6 @@ const statusIcons = (): { [key: string]: React.ReactElement } => {
 export const TestResult = memo(({ test }: IProps) => {
 	const { parent, title, state, err } = test;
 
-	console.log(test);
-
 	return (
 		<Box
 			sx={{

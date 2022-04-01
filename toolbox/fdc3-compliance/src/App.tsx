@@ -10,7 +10,7 @@ import { Header } from "./components/Header";
 import snackbarStore from "./store/SnackbarStore";
 import "./App.css";
 import { fdc3Ready } from "@finos/fdc3";
-import { AgentTests } from "./components/AgentTests/index";
+import { AgentTests } from "./components/AgentTests";
 import { FDC3Message } from "./components/FDC3Message";
 
 const mainTheme = createTheme({

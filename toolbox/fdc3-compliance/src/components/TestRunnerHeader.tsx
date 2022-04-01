@@ -1,31 +1,34 @@
-import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
-import { TestSummary } from "../TestSummary";
+import { TestSummary } from "./TestSummary";
 import { PlayArrowRounded } from "@mui/icons-material";
-import { initAllTests, runTests } from "fdc3-compliance";
 import { Stats, Test } from "mocha";
-import { TestResults } from "../TestResults";
+import { initAllTests, runTests } from "fdc3-compliance";
+import { TestsStatus } from "./TestRunner";
 
 const statuses = {
 	idle: 'Run Tests',
 	running: 'Running Tests',
 }
 
-export type TestsStatus = 'idle' | 'running'
+interface IProps {
+  addTestHandler: (test: Test) => void;
+  resetTestsHandler: () => void;
+}
 
-export const TestRunner = observer(() => {
-	const [status, setStatus] = useState<TestsStatus>('idle');
-	const [tests, setTests] = useState<Test[]>([]);
+export const TestRunnerHeader = ({ addTestHandler, resetTestsHandler }: IProps) => {
+  const [status, setStatus] = useState<TestsStatus>('idle');
 	const [successfulTests, setSuccessfulTests] = useState<number>(0);
 	const [failedTests, setFailedTests] = useState<number>(0);
 	const [total, setTotal] = useState<number>(1);
 	const [testStats, setTestStats] = useState<Stats | null>(null);
 	const [testsInitialised, setTestInitialised] = useState<boolean>(false);
+  const [showProgress, setShowProgress] = useState<boolean>(false);
+  const completion = Math.floor(((successfulTests + failedTests) / total) * 100);
 
 	const reset = () => {
-		setTests([]);
+		resetTestsHandler();
 		setSuccessfulTests(0);
 		setFailedTests(0);
 		setTestStats(null);
@@ -38,19 +41,32 @@ export const TestRunner = observer(() => {
 		}
 	}, []);
 
+  useEffect(() => {
+    if (completion !== 100) return
+
+    const hideProgressAfterDelay = setTimeout(() => {
+      setShowProgress(false)
+    }, 500)
+
+    return () => {
+      clearTimeout(hideProgressAfterDelay)
+    }
+  }, [completion])
+
 	const reportStart = (runner: any): void => {
 		reset();
 		setStatus('running');
-		setTotal(runner.total)
+		setTotal(runner.total);
+    setShowProgress(true);
 	};
 
 	const reportFailure = (test: any): void => {
-		setTests((prev) => [ ...prev, test ]);
+		addTestHandler(test);
 		setFailedTests((prev) => prev + 1);
 	};
 
 	const reportSuccess = (test: any) => {
-		setTests((prev) => [ ...prev, test ]);
+		addTestHandler(test);
 		setSuccessfulTests((prev) => prev + 1);
 	};
 
@@ -71,10 +87,8 @@ export const TestRunner = observer(() => {
 	return (
     <Box
 			sx={{
-				display: 'grid',
-				gridTemplateRows: 'auto 1fr',
-				gap: 2,
-				position: 'relative',
+        position: 'sticky',
+        top: 0,
 			}}
 		>
       <Box
@@ -83,9 +97,7 @@ export const TestRunner = observer(() => {
           gap: 2,
           justifyContent: 'space-between',
           alignItems: 'center',
-					position: 'sticky',
-					top: 0,
-					pt: 1,
+					py: 2,
 					backgroundColor: 'white',
 					boxShadow: '0 0 0.5rem 1rem white',
         }}
@@ -101,10 +113,20 @@ export const TestRunner = observer(() => {
           {statuses[status]}
         </LoadingButton>
 
-        <TestSummary status={status} passes={successfulTests} failures={failedTests} total={total} stats={testStats}/>
+        <TestSummary status={status} successfulTests={successfulTests} failedTests={failedTests} testStats={testStats}/>
       </Box>
       
-      <TestResults tests={tests}/>
+      {showProgress &&
+        <LinearProgress
+          variant="determinate"
+          value={completion}
+          sx={{
+            position: 'absolute',
+            bottom: 0,
+            width: '100%',
+          }}
+        />
+      }
     </Box>
 	);
-});
+};

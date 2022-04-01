@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import { TestRunner } from "../TestRunner";
-
-export type TestsStatus = "idle" | "running";
+import { TestRunner } from "./TestRunner";
 
 export const AgentTests = () => (
 	<Box

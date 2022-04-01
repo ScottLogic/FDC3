@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { Test } from "mocha";
-import { TestResult } from "../TestResult";
+import { TestResult } from "./TestResult";
 
 interface IProps {
 	tests: Test[];
