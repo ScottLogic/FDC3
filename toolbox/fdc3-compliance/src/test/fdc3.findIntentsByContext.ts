@@ -20,7 +20,11 @@ describe("fdc3.findIntentsByContext", () => {
       throw new Error(ExpectedErrorNotThrownError);
     } catch (ex) {
       if ((ex.message ?? ex) !== ResolveError.NoAppsFound) {
-        throw new Error(ExpectedErrorNotThrownError + "\nException thrown: " + (ex.message ?? ex))
+        throw new Error(
+          ExpectedErrorNotThrownError +
+            "\nException thrown: " +
+            (ex.message ?? ex)
+        );
       }
     }
   });

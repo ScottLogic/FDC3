@@ -9,7 +9,11 @@ describe("fdc3.open", () => {
       throw new Error(ExpectedErrorNotThrownError);
     } catch (ex) {
       if ((ex.message ?? ex) !== OpenError.AppNotFound) {
-        throw new Error(ExpectedErrorNotThrownError + "\nException thrown: " + (ex.message ?? ex))
+        throw new Error(
+          ExpectedErrorNotThrownError +
+            "\nException thrown: " +
+            (ex.message ?? ex)
+        );
       }
     }
   });

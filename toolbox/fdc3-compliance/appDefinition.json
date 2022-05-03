@@ -9,13 +9,13 @@
     "description": "FDC3 Compliance Test",
     "images": [
       {
-        "url": "https://fdc3.finos.org/img/fdc3-logo-2019.png"
+        "url": "http://localhost:8080/fdc3-icon-256.png"
       }
     ],
     "publisher": "FINOS",
     "icons": [
       {
-        "icon": "https://fdc3.finos.org/img/fdc3-logo-2019.png"
+        "icon": "http://localhost:8080/fdc3-icon-256.png"
       }
     ],
     "intents": [
